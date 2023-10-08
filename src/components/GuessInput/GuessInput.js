@@ -1,10 +1,17 @@
 import React from 'react'
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
 
-function GuessInput({ setGuessList }) {
+function GuessInput({ guessList, setGuessList }) {
   const [guess, setGuess] = React.useState('')
 
   function handleSubmit(e, guess) {
     e.preventDefault()
+
+    if (guessList.length >= NUM_OF_GUESSES_ALLOWED) {
+      console.log('Maximum number of guesses reached.')
+      return
+    }
+
     setGuessList((guessList) => [...guessList, guess])
     console.log({ guess })
     setGuess('')
