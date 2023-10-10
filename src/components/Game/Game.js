@@ -2,7 +2,7 @@ import React from 'react'
 import GuessList from '../GuessList'
 import GuessInput from '../GuessInput'
 import Banner from '../Banner'
-import { sample, getStatus } from '../../utils'
+import { sample } from '../../utils'
 import { WORDS } from '../../data'
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
 
