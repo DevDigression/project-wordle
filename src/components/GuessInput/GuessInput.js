@@ -1,12 +1,16 @@
 import React from 'react'
 import { checkGuess } from '../../game-helpers'
 
-function GuessInput({ answer, setGuessList }) {
+function GuessInput({ answer, setGuessList, setStatus }) {
   const [guess, setGuess] = React.useState('')
 
   function handleSubmit(e, guess, correctAnswer) {
     e.preventDefault()
     const validated = checkGuess(guess, correctAnswer)
+    const word = validated.map((l) => l.letter).join('')
+    if (word === correctAnswer) {
+      setStatus('won')
+    }
     setGuessList((guessList) => [...guessList, validated])
     setGuess('')
   }
