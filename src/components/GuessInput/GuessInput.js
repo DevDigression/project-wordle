@@ -1,26 +1,20 @@
 import React from 'react'
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
+import { checkGuess } from '../../game-helpers'
 
-function GuessInput({ guessList, setGuessList }) {
+function GuessInput({ answer, setGuessList }) {
   const [guess, setGuess] = React.useState('')
 
-  function handleSubmit(e, guess) {
+  function handleSubmit(e, guess, correctAnswer) {
     e.preventDefault()
-
-    if (guessList.length >= NUM_OF_GUESSES_ALLOWED) {
-      console.log('Maximum number of guesses reached.')
-      return
-    }
-
-    setGuessList((guessList) => [...guessList, guess])
-    console.log({ guess })
+    const validated = checkGuess(guess, correctAnswer)
+    setGuessList((guessList) => [...guessList, validated])
     setGuess('')
   }
 
   return (
     <form
       className='guess-input-wrapper'
-      onSubmit={(e) => handleSubmit(e, guess)}
+      onSubmit={(e) => handleSubmit(e, guess, answer)}
     >
       <label htmlFor='guess-input'>Enter guess:</label>
       <input

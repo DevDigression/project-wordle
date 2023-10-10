@@ -7,7 +7,7 @@ function GuessList({ guessList }) {
   return (
     <div className='guess-results'>
       {range(0, NUM_OF_GUESSES_ALLOWED).map((i) => (
-        <Guess key={i} guess={guessList[i]} />
+        <Guess key={`${guessList[i]}${i}`} guess={guessList[i]} />
       ))}
     </div>
   )

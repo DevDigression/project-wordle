@@ -1,13 +1,20 @@
 import React from 'react'
+import { range } from '../../utils'
+import { GUESS_LENGTH } from '../../constants'
 
-function Guess({ guess = '' }) {
+function Guess({ guess = {} }) {
   return (
     <p className='guess'>
-      <span className='cell'>{guess[0] && guess[0]}</span>
-      <span className='cell'>{guess[1] && guess[1]}</span>
-      <span className='cell'>{guess[2] && guess[2]}</span>
-      <span className='cell'>{guess[3] && guess[3]}</span>
-      <span className='cell'>{guess[4] && guess[4]}</span>
+      {range(0, GUESS_LENGTH).map((i) => (
+        <span
+          key={`${guess[i]}${i}`}
+          className={`cell ${
+            guess[i] && guess[i].status ? guess[i].status : ''
+          }`}
+        >
+          {guess[i] && guess[i].letter}
+        </span>
+      ))}
     </p>
   )
 }

@@ -11,10 +11,11 @@ console.info({ answer })
 
 function Game() {
   const [guessList, setGuessList] = React.useState([])
+
   return (
     <>
       <GuessList guessList={guessList} />
-      <GuessInput guessList={guessList} setGuessList={setGuessList} />
+      <GuessInput answer={answer} setGuessList={setGuessList} />
     </>
   )
 }
