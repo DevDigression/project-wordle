@@ -1,7 +1,9 @@
 import React from 'react'
 import GuessList from '../GuessList'
 import GuessInput from '../GuessInput'
+import Keyboard from '../Keyboard'
 import Banner from '../Banner'
+import { getKeysDisplay } from '../../game-helpers'
 import { sample } from '../../utils'
 import { WORDS } from '../../data'
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants'
@@ -16,6 +18,7 @@ function Game() {
   const [status, setStatus] = React.useState('playing')
   const isGameOver =
     status === 'won' || guessList.length >= NUM_OF_GUESSES_ALLOWED
+  const keysDisplay = getKeysDisplay(guessList)
 
   return (
     <>
@@ -23,11 +26,14 @@ function Game() {
       {isGameOver ? (
         <Banner status={status} answer={answer} guessList={guessList} />
       ) : (
-        <GuessInput
-          answer={answer}
-          setGuessList={setGuessList}
-          setStatus={setStatus}
-        />
+        <>
+          <GuessInput
+            answer={answer}
+            setGuessList={setGuessList}
+            setStatus={setStatus}
+          />
+          <Keyboard keysDisplay={keysDisplay} />
+        </>
       )}
     </>
   )
