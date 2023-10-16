@@ -7,12 +7,10 @@ function GuessInput({ answer, setGuessList, setStatus }) {
   function handleSubmit(e, guess, correctAnswer) {
     e.preventDefault()
     const validated = checkGuess(guess, correctAnswer)
-    const word = validated.map((l) => l.letter).join('')
-    if (word === correctAnswer) {
-      setStatus('won')
+    if (validated) {
+      setGuessList((guessList) => [...guessList, validated])
+      setGuess('')
     }
-    setGuessList((guessList) => [...guessList, validated])
-    setGuess('')
   }
 
   return (

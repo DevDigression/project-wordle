@@ -3,11 +3,12 @@
  * solving algorithm!
  */
 
+import { NUM_OF_GUESSES_ALLOWED } from './constants'
+
 export function checkGuess(guess, answer) {
   // This constant is a placeholder that indicates we've successfully
   // dealt with this character (it's correct, or misplaced).
   const SOLVED_CHAR = '✓'
-
   if (!guess) {
     return null
   }
@@ -54,24 +55,43 @@ export function checkGuess(guess, answer) {
   return result
 }
 
-export const getKeysDisplay = (guessList) => {
-  const keysDisplay = {
-    correct: [],
-    incorrect: [],
-    misplaced: [],
+export function getGameStatus(answer, guessList) {
+  const lastGuess = guessList[guessList.length - 1]
+
+  if (!lastGuess) {
+    return 'playing'
   }
 
-  guessList.forEach((guess) => {
-    guess.forEach((letter) => {
-      if (letter.status === 'correct') {
-        keysDisplay.correct.push(letter.letter)
-      } else if (letter.status === 'incorrect') {
-        keysDisplay.incorrect.push(letter.letter)
-      } else if (letter.status === 'misplaced') {
-        keysDisplay.misplaced.push(letter.letter)
-      }
-    })
-  })
+  const lastGuessString = lastGuess
+    .map((item) => item.letter)
+    .join('')
+    .toUpperCase()
+  if (lastGuessString === answer) {
+    return 'won'
+  }
 
-  return keysDisplay
+  if (guessList.length >= NUM_OF_GUESSES_ALLOWED) {
+    return 'lost'
+  }
+
+  return 'playing'
+}
+
+export const getKeysDisplay = (keys, guessList) => {
+  if (guessList.length === 0) {
+    return keys
+  }
+
+  const currentGuess = guessList[guessList.length - 1]
+
+  for (const letter of currentGuess) {
+    const currentLetter = keys
+      .flat()
+      .find((key) => key.letter === letter.letter)
+    if (currentLetter.status !== 'correct') {
+      currentLetter.status = letter.status
+    }
+  }
+
+  return keys
 }
