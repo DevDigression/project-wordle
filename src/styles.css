@@ -161,6 +161,27 @@ h1 {
   outline-offset: 4px;
 }
 
+.restart {
+  width: 100%;
+  max-width: 600px;
+  margin: 50px 0 150px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.restart button {
+  font-size: 1.25rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: var(--color-gray-300);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 250ms ease-in-out;
+}
+
 .banner {
   position: fixed;
   left: 0;
@@ -168,6 +189,7 @@ h1 {
   bottom: 0;
   width: 100%;
   max-width: 600px;
+  max-height: 100px;
   margin: 0 auto;
   padding: 32px;
   text-align: center;
@@ -182,6 +204,48 @@ h1 {
 }
 .sad.banner {
   background: var(--color-error);
+  color: white;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.keyboard-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--color-gray-700);
+  background-color: var(--color-gray-700);
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1.25rem;
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.incorrect {
+  background: var(--color-gray-300);
+  border-color: var(--color-gray-300);
+  color: white;
+}
+
+.correct {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.misplaced {
+  background: var(--color-warning);
+  border-color: var(--color-warning);
   color: white;
 }
 
